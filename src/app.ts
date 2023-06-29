@@ -4,7 +4,7 @@ const app: Application = express()
 const port = 3000
 console.log('port', port)
 // cors call
-    app.use(cors())
+app.use(cors())
 // body parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
