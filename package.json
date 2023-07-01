@@ -6,16 +6,17 @@
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
-    "lint:fix": "eslint --fix",
+    "lint:fix": "eslint . --fix",
     "prettierrc:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "lint-staged": "yarn lint:check && yarn prettier:check",
+    "prettierrc:fix": "prettier --write .",
+    "lint-staged": "yarn lint:check && yarn prettierrc:check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Muhammad A SI F",
   "license": "ISC",
   "lint-staged": {
-    "src/**/*.ts": "yarn lint-prettier"
+    "src/**/*.ts": "yarn lint-staged"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
