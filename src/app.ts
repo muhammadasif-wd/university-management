@@ -5,7 +5,7 @@ import cors from 'cors'
 const app: Application = express()
 
 //? Application Router
-// import userRoutes from "./app/modules/user/user.route"
+import usersRouter from './app/modules/users/users.route'
 
 //? using cors
 app.use(cors())
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true })) //accept data url or json
 */
 
 //? Calling Routes
-// app.use("/api/v1/user", userRoutes)
+app.use('/api/v1/users', usersRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send(
