@@ -1,18 +1,16 @@
-import express, { Application, Request, Response } from "express";
-import cors from "cors";
+import express, { Application, Request, Response } from 'express'
+import cors from 'cors'
 
 //? call express
 const app: Application = express()
 
-
 //? Application Router
 // import userRoutes from "./app/modules/user/user.route"
-
 
 //? using cors
 app.use(cors())
 
-//? parse data 
+//? parse data
 app.use(express.json()) //json data
 app.use(express.urlencoded({ extended: true })) //accept data url or json
 
@@ -34,10 +32,10 @@ app.use(express.urlencoded({ extended: true })) //accept data url or json
 //? Calling Routes
 // app.use("/api/v1/user", userRoutes)
 
-app.get('/', (req:Request, res:Response) => {
-   res.send(
-    `<h1 style="color:#242B2E;font-size:62px; text-align:center;margin-top:200px">Welcome to server</h1>`
-    )
+app.get('/', (req: Request, res: Response) => {
+  res.send(
+    `<h1 style="color:#242B2E;font-size:62px; text-align:center;margin-top:200px">Welcome to server</h1>`,
+  )
 })
 
 export default app
