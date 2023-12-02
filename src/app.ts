@@ -1,11 +1,10 @@
-import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
+import express, { Application, Request, Response } from 'express'
+import globalErrorHandler from './app/middlewares/globalErrorHandler'
+import { UserRoutes } from './app/modules/users/user.route'
 
 //? call express
 const app: Application = express()
-
-//? Application Router
-import usersRouter from './app/modules/users/users.route'
 
 //? using cors
 app.use(cors())
@@ -30,8 +29,9 @@ app.use(express.urlencoded({ extended: true })) //accept data url or json
 */
 
 //? Calling Routes
-app.use('/api/v1/users', usersRouter)
+app.use('/api/v1/users', UserRoutes)
 
+app.use(globalErrorHandler)
 app.get('/', (req: Request, res: Response) => {
   res.send(
     `<h1 style="color:#242B2E;font-size:62px; text-align:center;margin-top:200px">Welcome to server</h1>`,
