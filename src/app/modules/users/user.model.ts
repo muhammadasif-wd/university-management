@@ -1,10 +1,7 @@
-import { Model, Schema, model } from 'mongoose'
-import { IUser } from './users.interface'
+import { Schema, model } from 'mongoose'
+import { IUser, UserModel } from './user.interface'
 
-// when you use static methods
-type UserModel = Model<IUser, object>
-
-export const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUser>(
   {
     id: {
       type: String,
@@ -20,7 +17,8 @@ export const userSchema = new Schema<IUser>(
       required: true,
     },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+  },
 )
-
 export const User = model<IUser, UserModel>('User', userSchema)
