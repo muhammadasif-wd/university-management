@@ -40,6 +40,10 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
   },
   {
     timestamps: true,
+    // for _id to id
+    toJSON: {
+      virtuals: true,
+    },
   },
 )
 
