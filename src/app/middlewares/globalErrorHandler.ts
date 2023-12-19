@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
+
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 import { Error } from 'mongoose'
 import { ZodError } from 'zod'
@@ -10,6 +13,7 @@ import handleValidationError from '../../errors/handleValidationError'
 import handleZodError from '../../errors/handleZodError'
 import { errorlogger } from '../../shared/logger'
 import { IGenericErrorMessage } from '../interfaces/error'
+import handleCastError from '../../errors/handleCastError'
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -46,6 +50,11 @@ const globalErrorHandler: ErrorRequestHandler = (
           },
         ]
       : []
+  } else if (error.name === 'CastError') {
+    const simplifiedError = handleCastError(error)
+    statusCode = simplifiedError.statusCode
+    message = simplifiedError.message
+    errorMessages = simplifiedError.errorMessages
   } else if (error instanceof Error) {
     message = error?.message
     errorMessages = error?.message
@@ -64,8 +73,6 @@ const globalErrorHandler: ErrorRequestHandler = (
     errorMessages,
     stack: config.env !== 'production' ? error?.stack : undefined,
   })
-
-  next()
 }
 
 export default globalErrorHandler
