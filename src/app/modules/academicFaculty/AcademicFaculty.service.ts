@@ -15,7 +15,6 @@ const createAcademicFaculty = async (
   const result = await AcademicFaculty.create(payload)
   return result
 }
-
 const getAllAcademicFaculty = async (
   filters: IAcademicFacultyFilters,
   paginationOptions: IPaginationOptions,
@@ -66,7 +65,31 @@ const getAllAcademicFaculty = async (
     data: result,
   }
 }
+const getSingleAcademicFaculty = async (
+  id: string,
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findById({ _id: id })
+  return result
+}
+const updateAcademicFaculty = async (
+  id: string,
+  payload: Partial<IAcademicFaculty>,
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  })
+  return result
+}
+const deleteAcademicFaculty = async (
+  id: string,
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findByIdAndDelete({ _id: id })
+  return result
+}
 export const AcademicFacultyService = {
   createAcademicFaculty,
   getAllAcademicFaculty,
+  getSingleAcademicFaculty,
+  updateAcademicFaculty,
+  deleteAcademicFaculty,
 }
