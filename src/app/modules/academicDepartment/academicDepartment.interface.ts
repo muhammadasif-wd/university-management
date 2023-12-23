@@ -1,11 +1,17 @@
-import { Model } from 'mongoose'
+import { Model, Types } from 'mongoose'
 import { IAcademicFaculty } from '../academicFaculty/academicFaculty.interface'
 
 export type IAcademicDepartment = {
   title: string
-  academicFaculty: string | IAcademicFaculty
+  academicFaculty: Types.ObjectId | IAcademicFaculty
 }
+
 export type AcademicDepartmentModel = Model<
   AcademicDepartmentModel,
   Record<string, unknown>
 >
+
+export type IAcademicDepartmentFilters = {
+  searchTerm?: string
+  academicFaculty?: Types.ObjectId
+}

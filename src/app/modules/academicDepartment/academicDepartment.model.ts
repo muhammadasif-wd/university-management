@@ -4,7 +4,7 @@ import {
   IAcademicDepartment,
 } from './academicDepartment.interface'
 
-const academicDepartmentSchema = new Schema<
+const AcademicDepartmentSchema = new Schema<
   IAcademicDepartment,
   AcademicDepartmentModel
 >(
@@ -12,23 +12,23 @@ const academicDepartmentSchema = new Schema<
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     academicFaculty: {
       type: Schema.Types.ObjectId,
-      ref: 'academicFaculty',
+      ref: 'AcademicFaculty',
       required: true,
     },
   },
   {
     timestamps: true,
-    // for _id to id
     toJSON: {
       virtuals: true,
     },
   },
 )
 
-export const academicDepartment = model<
+export const AcademicDepartment = model<
   IAcademicDepartment,
   AcademicDepartmentModel
->('academicDepartment', academicDepartmentSchema)
+>('AcademicDepartment', AcademicDepartmentSchema)
