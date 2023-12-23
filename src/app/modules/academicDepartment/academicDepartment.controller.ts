@@ -36,7 +36,7 @@ const getAllAcademicDepartments = catchAsync(
       filters,
       paginationOptions,
     )
-
+    //  send response
     sendResponse<IAcademicDepartment[]>(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -47,7 +47,42 @@ const getAllAcademicDepartments = catchAsync(
   },
 )
 
-export const academicDepartmentController = {
+const getSingleAcademicDepartment = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params
+    const result =
+      await AcademicDepartmentService.getSingleAcademicDepartment(id)
+
+    // send response
+    sendResponse<IAcademicDepartment>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Single Academic Department fetch successfully',
+      data: result,
+    })
+  },
+)
+const updateAcademicDepartment = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params
+    const { ...academicFaculty } = req.body
+    const result = await AcademicDepartmentService.updateAcademicDepartment(
+      id,
+      academicFaculty,
+    )
+
+    // send response
+    sendResponse<IAcademicDepartment>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Academic Department updated successfully.',
+      data: result,
+    })
+  },
+)
+export const AcademicDepartmentController = {
   createAcademicDepartment,
   getAllAcademicDepartments,
+  getSingleAcademicDepartment,
+  updateAcademicDepartment,
 }
