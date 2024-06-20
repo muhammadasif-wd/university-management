@@ -1,11 +1,11 @@
 import express from 'express'
 import validateRequest from '../../middlewares/validateRequest'
-import { UserController } from './user.controller'
-import { UserValidation } from './user.validation'
+import { UserController } from './auth.controller'
+import { UserValidation } from './auth.validation'
 const router = express.Router()
 
 router.post(
-  '/create-user',
+  '/sign-up',
   validateRequest(UserValidation.createUserZodSchema),
   UserController.createUser,
 )

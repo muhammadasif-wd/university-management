@@ -1,0 +1,9 @@
+user information for registration
+
+
+1. user name
+2. user email
+3. user phone number
+4. user password for further login
+5. user role for power of admin panel
+6. user status for active | inactive  or active | deactive
